@@ -1,10 +1,10 @@
 ===  wp-jalali ===
-Contributors: mani_monaj, gonahkar, moallemi, zakrot
+Contributors: mani_monaj, gonahkar, moallemi, zakrot, lessmore92
 Donate link: http://www.wp-persian.com/donate
 Tags: Calendar Conversion, Persian, Farsi, Afghan, Tajik, Jalali, Date, Calendar, i18n, l10n
-Tested up to: 4.6.1
+Tested up to: 6.2.2
 Requires at least: 3.9
-Stable tag: 5.0.1
+Stable tag: 6.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,13 +47,17 @@ wp-jalali v5.0 is a full rewrite of the 4.x plugin by [Zakrot Web Solutions](htt
 
 = How can I report bugs or contribute to the plugin?
 
-All developments are happening on [plugin's github repository](https://github.com/wp-persian/wp-jalali). You can use the [Issue Tracker](https://github.com/wp-persian/wp-jalali/issues) to report bugs and issues. You can also send your patches using github [Pull Requests](https://help.github.com/articles/using-pull-requests) feature. 
+All developments are happening on [plugin's github repository](https://github.com/wp-persian/wp-jalali). You can use the [Issue Tracker](https://github.com/wp-persian/wp-jalali/issues) to report bugs and issues. You can also send your patches using github [Pull Requests](https://help.github.com/articles/using-pull-requests) feature.
 
 == Screenshots ==
 
 1. Preview of wp-jalali's Custom Admin Page
 
 == Changelog ==
+
+= 6.0.0 =
+
+* Support PHP > 8
 
 = 5.0.1 =
 

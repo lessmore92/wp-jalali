@@ -1,28 +1,34 @@
 <?php
+# 2023-8-1 Mojtaba Bahrami
+# Fix PHP 8 errors
+#PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wp-content/plugins/wp-jalali/lib/date.php on line 96
+#PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wp-content/plugins/wp-jalali/lib/date.php on line 96
+#PHP Fatal error:  Unparenthesized a ? b : c ? d : e is not supported. Use either (a ? b : c) ? d : e or a ? b : (c ? d : e) in /wp-content/plugins/wp-jalali/lib/date.php on line 283
+#PHP Fatal error:  Unparenthesized a ? b : c ? d : e is not supported. Use either (a ? b : c) ? d : e or a ? b : (c ? d : e) in /wp-content/plugins/wp-jalali/lib/date.php on line 283
 
 # 2014 Zakrot Web Solutions
-# 
+#
 # changes:
 #   function names changed
 #   added timesone
 #   added jmaketime
-# 
+#
 # 2009-2013 Vahid Sohrablou (IranPHP.org)
-# 2000 Roozbeh Pournader and Mohammad Tou'si  
-# 
-# This program is free software; you can redistribute it and/or 
-# modify it under the terms of the GNU General Public License 
-# as published by the Free Software Foundation; either version 2 
-# of the License, or (at your option) any later version. 
-# 
-# This program is distributed in the hope that it will be useful, 
-# but WITHOUT ANY WARRANTY; without even the implied warranty of 
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-# GNU General Public License for more details. 
-# 
-# A copy of the GNU General Public License is available from: 
-# 
-# <a href="http://gnu.org/copyleft/gpl.html" target="_blank">http://gnu.org/copyleft/gpl.html</a> 
+# 2000 Roozbeh Pournader and Mohammad Tou'si
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# A copy of the GNU General Public License is available from:
+#
+# <a href="http://gnu.org/copyleft/gpl.html" target="_blank">http://gnu.org/copyleft/gpl.html</a>
 # Version 1.2.9
 
 
@@ -42,7 +48,7 @@ function jdate($format, $timestamp = NULL, $timezone = false, $fanum = NULL) {
     global $jdate_month_name, $ztjalali_option;
     static $jdate_month_days = array(0, 31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29);
     static $jdate_week_name = array('شنبه', 'یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنج شنبه', 'جمعه');
-    
+
     if (!$timestamp)
         $timestamp = time();
     elseif (!is_numeric($timestamp))
@@ -54,7 +60,7 @@ function jdate($format, $timestamp = NULL, $timezone = false, $fanum = NULL) {
     if ($timezone === 'local' OR $timezone === FALSE) {
         //do noting
     } elseif ( $timezone === TRUE) {
-        $fanum = FALSE;// support jdate older version 
+        $fanum = FALSE;// support jdate older version
     } elseif ($timezone === 'current') {
         $time_zone = 'Asia/Tehran';
         function_exists('get_option') AND $time_zone = get_option('timezone_string');
@@ -93,9 +99,9 @@ function jdate($format, $timestamp = NULL, $timezone = false, $fanum = NULL) {
     $result = '';
 
     while ($i < $lenghFormat) {
-        $par = $format{$i};
+        $par = $format[$i];
         if ($par == '\\') {
-            $result .= $format{ ++$i};
+            $result .= $format[ ++$i];
             $i ++;
             continue;
         }
@@ -191,7 +197,7 @@ function jdate($format, $timestamp = NULL, $timezone = false, $fanum = NULL) {
             case 's':
             case 'u':
             case 'i':
-            # Timezone
+                # Timezone
             case 'e':
             case 'I':
             case 'O':
@@ -257,9 +263,9 @@ function jstrftime($format, $timestamp = NULL, $fanum = false) {
     $result = '';
 
     while ($i < $lenghFormat) {
-        $par = $format{$i};
+        $par = $format[$i];
         if ($par == '%') {
-            $type = $format{ ++$i};
+            $type = $format[ ++$i];
             switch ($type) {
                 # Day
                 case 'a':
@@ -280,7 +286,7 @@ function jstrftime($format, $timestamp = NULL, $fanum = false) {
 
                 case 'j':
                     $dayinM = jday_of_year($pMonth, $pDay);
-                    $result .= (($dayinM < 10) ? '00' . $dayinM : ($dayinM < 100) ? '0' . $dayinM : $dayinM);
+                    $result .= ($dayinM < 10) ? '00' . $dayinM : (($dayinM < 100) ? '0' . $dayinM : $dayinM);
                     break;
 
                 case 'u':
@@ -348,9 +354,9 @@ function jstrftime($format, $timestamp = NULL, $fanum = false) {
                 case 'P':
                 case 'r':
                     if (date('a', $timestamp) == 'am') {
-                        $result .= (($type == 'p') ? 'ق.ظ' : ($type == 'P') ? 'قبل از ظهر' : strftime("%I:%M:%S قبل از ظهر", $timestamp));
+                        $result .= ($type == 'p') ? 'ق.ظ' : (($type == 'P') ? 'قبل از ظهر' : strftime("%I:%M:%S قبل از ظهر", $timestamp));
                     } else {
-                        $result .= (($type == 'p') ? 'ب.ظ' : ($type == 'P') ? 'بعد از ظهر' : strftime("%I:%M:%S بعد از ظهر", $timestamp));
+                        $result .= ($type == 'p') ? 'ب.ظ' : (($type == 'P') ? 'بعد از ظهر' : strftime("%I:%M:%S بعد از ظهر", $timestamp));
                     }
                     break;
 
@@ -484,7 +490,7 @@ function gregorian_to_jalali($g_y, $g_m, $g_d) {
     }
 
     if ($gm > 1 && (($gy % 4 == 0 && $gy % 100 != 0) || ($gy % 400 == 0)))
-    # leap and after Feb
+        # leap and after Feb
         $g_day_no ++;
     $g_day_no += $g_d - 1;
     $j_day_no = $g_day_no - 79;
@@ -584,7 +590,7 @@ function int_div($a, $b) {
 function jday_of_year($pMonth, $pDay) {
     static $jdate_month_days = array(0, 31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29);
     $days = 0;
-    
+
     for ($i = 1; $i < $pMonth; $i ++) {
         $days += $jdate_month_days[$i];
     }
